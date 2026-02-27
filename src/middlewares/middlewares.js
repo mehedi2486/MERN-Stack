@@ -2,29 +2,33 @@ const express = require('express');
 const app = express();
 
 
-function TicketChecker(req, res, next){
-    const ticket = req.query.ticket;
-    if(ticket === "free"){
+function isEligibleForVote(req, res, next){
+   const age = req.query.age;
+     if (age >= 18){
         next();
-    }else {
-        res.status(403).send("Forbidden");
-    }
-
+     }else {
+        res.json(
+            { msg: "You are not eligible for voting"}
+        )
+     }
 }
 
-app.use(TicketChecker);
+// app.use(isEligibleForVote);
 
-app.get('/ride1', function (req, res){
-    res.send("Enjoy your ride 1");
+app.get('/ride1', isEligibleForVote, function (req,res){
+   res.json ({
+      msg:"you have successfully riden the ride 1"
+   })
 })
 
-app.get('/ride2', function (req, res){
-    res.send("Enjoy your ride 2");
-})
 
-app.get('/ride3', function (req, res){
-    res.send("Enjoy your ride 3");
-})
+// app.get('/ride2', function (req, res){
+//    if (isOldEnough (req.query.age)){
+//       res.json ({
+//          msg:"you have successfully riden the ride 2"
+//       })
+//    }
+// })
 
 app.listen(3000);
 
