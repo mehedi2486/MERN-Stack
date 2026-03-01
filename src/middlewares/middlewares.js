@@ -4,15 +4,17 @@ const app = express();
 let requestCount = 0;
 
 
-function requestIncrease(req, res){
-requestCount = requestCount + 1;
-console.log(`Total number of requests = ${requestCount}`)
+
+function loggerMiddleWare(req, res, next){
+   console.log("Method is "+ req.method)
+   console.log("Url is "+ req.url)
+   console.log(new Date());
+   next();
 
 }
+app.use(loggerMiddleWare);
 
-
-app.get('/sum',requestIncrease, function (req, res){
-   requestIncrease();
+app.get('/sum', function (req, res){
    const a = parseInt(req.query.a);
    const b = parseInt(req.query.b);
    res.json({
@@ -22,7 +24,6 @@ app.get('/sum',requestIncrease, function (req, res){
 
 
 app.get('/multiply', function (req, res){
-   requestIncrease();
    const a = parseInt(req.query.a);
    const b = parseInt(req.query.b);
    res.json({
@@ -58,3 +59,53 @@ app.get('/multiply', function (req, res){
 
 app.listen(3000);
 
+
+
+
+
+function add (a, b){
+   return a+b;
+}
+
+const add = (a, b) =>{
+   return a+b;
+}
+
+const add = (a,b) => a+b;
+
+const arr = [1,2,3,4,5];
+
+for(let i=0; i<23; i++){
+   console.log(i);
+}
+const doubled = arr.map(function sum(a){
+   return num *2;
+})
+
+const users = [
+   {name: "mehedi", age:20},
+   {name: "raju", age:45}
+]
+
+const name = users.map((user)=>{ user.name})
+
+const number = [1,23,4,5,6];
+
+const even = number.filter(num => num % 2 === 0);
+
+
+
+async function getData(){
+   const response = await axios.get('',{
+      username:"harkirat",
+      password:"1213423",
+   },
+   {
+      headers: {
+         Authorization:"Bearer 123",
+
+      },
+   },  
+  
+);
+}

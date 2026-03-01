@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+
+</head>
+
+<body>
+    <script>
+        async function getData() {
+            const a = document.getElementById('a').value;
+            const b = document.getElementById('b').value;
+            const response = await fetch('http://localhost:3000/sum',{
+                method:"POST",
+                headers:{
+                     'Content-Type': 'application/json'
+                },
+                body:JSON.stringify({
+                    a:a,
+                    b:b
+                })
+            })
+
+            const data =await response.json();
+            
+            console.log(data);
+
+        }
+
+    </script>
+
+
+
+    <input id="a" type="text" placeholder="Enter the first Value">
+    <input id="b" type="text" placeholder="Enter the second Value">
+
+    <button onclick="getData()">Find the sum</button>
+
+
+
+
+</body>
+
+</html>
