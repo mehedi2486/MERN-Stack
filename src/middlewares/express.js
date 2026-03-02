@@ -1,15 +1,14 @@
 const express = require('express');
-const bodyParser = require('body-parser');
 const app = express();
 
 
-// function middlewares(req, res, next){
-//     console.log("hello");
-//     res.send("done")
-// }
+function auth(req, res, next){
+    console.log("this is the authentacation function");
+
+}
 
 //app.use(bodyParser.json());
-app.use(express.json());
+app.use(auth());
 
 
 
